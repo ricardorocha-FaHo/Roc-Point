@@ -12,6 +12,8 @@ GetFarmacias = "https://script.google.com/macros/s/AKfycbx18-nVSTkwaBXShlG_nJtfX
 GetUsuraios = "https://script.google.com/macros/s/AKfycbzJWf6o4y-_g4rW9_Ivl0fTV5-mV5OwjcBeDoYmo2liH3UnZcRT7q-1V1Oa-eAEz_ShXw/exec"
 PostFarmacia = "https://script.google.com/macros/s/AKfycbyKVyr8qaErTi3v4KmAj1TKDZ0FysUeySlkHGoTgVYD6i5Ez_gd181CwCys__S4pdA7LA/exec"
 GetSitiotipo = "https://script.google.com/macros/s/AKfycbyKVyr8qaErTi3v4KmAj1TKDZ0FysUeySlkHGoTgVYD6i5Ez_gd181CwCys__S4pdA7LA/exec"
+GetUsuarios_Sitio ="https://script.google.com/macros/s/AKfycbyIzdPsAZnFjHMQczjMuHnXXvr79w0W8XR5rRYvSYv44yI3tmHp7xb-FJdkWoeBjarP8A/exec"
+
 
 class FarmaciaData(BaseModel):
     farma_id: str
@@ -36,6 +38,14 @@ def obtener_farmacias():
     except Exception as e:
         return JSONResponse(content={"error": str(e)}, status_code=500)
 
+@app.get("/GetUsuarios_Sitio")
+def obtener_farmacias():
+    try:
+        response = requests.get(GetSitiotipo)
+        response.raise_for_status()
+        return JSONResponse(content=response.json())
+    except Exception as e:
+        return JSONResponse(content={"error": str(e)}, status_code=500)
 
 @app.get("/usuarios")
 def obtener_Usuarios():
