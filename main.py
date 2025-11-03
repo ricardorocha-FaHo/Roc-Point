@@ -11,6 +11,7 @@ app = FastAPI(title="API Farmacias FastAPI", version="1.0")
 GetFarmacias = "https://script.google.com/macros/s/AKfycbx18-nVSTkwaBXShlG_nJtfXSn0Y-01EA18Q_OTVzlEm4pl9oFZql2yJIUrmIBOT0Jg6g/exec"
 GetUsuraios = "https://script.google.com/macros/s/AKfycbzJWf6o4y-_g4rW9_Ivl0fTV5-mV5OwjcBeDoYmo2liH3UnZcRT7q-1V1Oa-eAEz_ShXw/exec"
 PostFarmacia = "https://script.google.com/macros/s/AKfycbyKVyr8qaErTi3v4KmAj1TKDZ0FysUeySlkHGoTgVYD6i5Ez_gd181CwCys__S4pdA7LA/exec"
+GetSitiotipo = "https://script.google.com/macros/s/AKfycbyKVyr8qaErTi3v4KmAj1TKDZ0FysUeySlkHGoTgVYD6i5Ez_gd181CwCys__S4pdA7LA/exec"
 
 class FarmaciaData(BaseModel):
     farma_id: str
@@ -21,6 +22,15 @@ class FarmaciaData(BaseModel):
 def obtener_farmacias():
     try:
         response = requests.get(GetFarmacias)
+        response.raise_for_status()
+        return JSONResponse(content=response.json())
+    except Exception as e:
+        return JSONResponse(content={"error": str(e)}, status_code=500)
+
+@app.get("/Tipos_sitio_sitio")
+def obtener_farmacias():
+    try:
+        response = requests.get(GetSitiotipo)
         response.raise_for_status()
         return JSONResponse(content=response.json())
     except Exception as e:
