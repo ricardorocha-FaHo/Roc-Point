@@ -40,7 +40,7 @@ def ping():
 def keep_alive():
     while True:
         try:
-           # requests.get("https://tu-servidor-render.onrender.com/ping")  # <- Cambia por tu URL real
+            requests.get("https://roc-point.onrender.com/ping")  # <- Cambia por tu URL real
             print("✅ Ping enviado correctamente")
         except Exception as e:
             print(f"⚠️ Error enviando ping: {e}")
