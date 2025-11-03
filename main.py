@@ -44,6 +44,6 @@ def keep_alive():
             print("✅ Ping enviado correctamente")
         except Exception as e:
             print(f"⚠️ Error enviando ping: {e}")
-        time.sleep(10)
+        time.sleep(180)
 
 threading.Thread(target=keep_alive, daemon=True).start()
