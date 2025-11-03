@@ -6,14 +6,11 @@ import time
 
 app = FastAPI(title="API Farmacias FastAPI", version="1.0")
 
-# ======================
-# URL del Apps Script desplegado (GET y POST)
-# ======================
-GetFarmacias = "https://script.google.com/macros/s/AKfycbx18-nVSTkwaBXShlG_nJtfXSn0Y-01EA18Q_OTVzlEm4pl9oFZql2yJIUrmIBOT0Jg6g/exec"
 
-# ======================
-# ENDPOINT GET: obtiene farmacias desde Google Sheets
-# ======================
+GetFarmacias = "https://script.google.com/macros/s/AKfycbx18-nVSTkwaBXShlG_nJtfXSn0Y-01EA18Q_OTVzlEm4pl9oFZql2yJIUrmIBOT0Jg6g/exec"
+GetUsuraios = "https://script.google.com/macros/s/AKfycbzJWf6o4y-_g4rW9_Ivl0fTV5-mV5OwjcBeDoYmo2liH3UnZcRT7q-1V1Oa-eAEz_ShXw/exec"
+
+
 @app.get("/farmacias")
 def obtener_farmacias():
     try:
@@ -23,20 +20,21 @@ def obtener_farmacias():
     except Exception as e:
         return JSONResponse(content={"error": str(e)}, status_code=500)
 
-# ======================
-# ENDPOINT POST: agrega una fila a Google Sheets vía Apps Script
+
+@app.get("/usuarios")
+def obtener_Usuarios():
+    try:
+        response = requests.get(GetUsuraios)
+        response.raise_for_status()
+        return JSONResponse(content=response.json())
+    except Exception as e:
+        return JSONResponse(content={"error": str(e)}, status_code=500)
 
 
-# ======================
-# ENDPOINT PING para mantener vivo Render
-# ======================
 @app.get("/ping")
 def ping():
     return {"status": "alive"}
 
-# ======================
-# HILO DE AUTO-PING
-# ======================
 def keep_alive():
     while True:
         try:
