@@ -41,7 +41,7 @@ def obtener_farmacias():
 @app.get("/GetUsuarios_Sitio")
 def obtener_farmacias():
     try:
-        response = requests.get(GetSitiotipo)
+        response = requests.get(GetUsuarios_Sitio)
         response.raise_for_status()
         return JSONResponse(content=response.json())
     except Exception as e:
