@@ -30,7 +30,7 @@ def obtener_farmacias():
         return JSONResponse(content={"error": str(e)}, status_code=500)
 
 @app.get("/Tipos_sitio_sitio")
-def obtener_farmacias():
+def obtener_relacion_Sitio_TipoSitio():
     try:
         response = requests.get(GetSitiotipo)
         response.raise_for_status()
@@ -39,7 +39,7 @@ def obtener_farmacias():
         return JSONResponse(content={"error": str(e)}, status_code=500)
 
 @app.get("/GetUsuarios_Sitio")
-def obtener_farmacias():
+def obtener_relacion_Usuarios_Sitio():
     try:
         response = requests.get(GetUsuarios_Sitio)
         response.raise_for_status()
@@ -81,6 +81,6 @@ def keep_alive():
             print("✅ Ping enviado correctamente")
         except Exception as e:
             print(f"⚠️ Error enviando ping: {e}")
-        time.sleep(180)
+        time.sleep(600)
 
 threading.Thread(target=keep_alive, daemon=True).start()
