@@ -11,7 +11,7 @@ app = FastAPI(title="API Farmacias FastAPI", version="1.0")
 GetFarmacias = "https://script.google.com/macros/s/AKfycbx18-nVSTkwaBXShlG_nJtfXSn0Y-01EA18Q_OTVzlEm4pl9oFZql2yJIUrmIBOT0Jg6g/exec"
 GetUsuraios = "https://script.google.com/macros/s/AKfycbzJWf6o4y-_g4rW9_Ivl0fTV5-mV5OwjcBeDoYmo2liH3UnZcRT7q-1V1Oa-eAEz_ShXw/exec"
 PostFarmacia = "https://script.google.com/macros/s/AKfycbyKVyr8qaErTi3v4KmAj1TKDZ0FysUeySlkHGoTgVYD6i5Ez_gd181CwCys__S4pdA7LA/exec"
-GetSitiotipo = "https://script.google.com/macros/s/AKfycbyKVyr8qaErTi3v4KmAj1TKDZ0FysUeySlkHGoTgVYD6i5Ez_gd181CwCys__S4pdA7LA/exec"
+GetSitiotipo = "https://script.google.com/macros/s/AKfycbya04HaHG29zrA9L1S8b_eTemkLGHf7vDLdK_DO9ukhD0p4mKOfDYlQ8c-EmoJp7rjP/exec"
 GetUsuarios_Sitio ="https://script.google.com/macros/s/AKfycbyIzdPsAZnFjHMQczjMuHnXXvr79w0W8XR5rRYvSYv44yI3tmHp7xb-FJdkWoeBjarP8A/exec"
 
 
@@ -21,7 +21,7 @@ class FarmaciaData(BaseModel):
     client_id: str
 
 @app.get("/farmacias")
-def obtener_farmacias():
+def obtener_farmacias_relacion_TipoSitio():
     try:
         response = requests.get(GetFarmacias)
         response.raise_for_status()
@@ -30,7 +30,7 @@ def obtener_farmacias():
         return JSONResponse(content={"error": str(e)}, status_code=500)
 
 @app.get("/Tipos_sitio_sitio")
-def obtener_relacion_Sitio_TipoSitio():
+def obtener_TipoSitio_relacion_Sitio():
     try:
         response = requests.get(GetSitiotipo)
         response.raise_for_status()
@@ -39,7 +39,7 @@ def obtener_relacion_Sitio_TipoSitio():
         return JSONResponse(content={"error": str(e)}, status_code=500)
 
 @app.get("/GetUsuarios_Sitio")
-def obtener_relacion_Usuarios_Sitio():
+def obtener_Usuarios_relacion_Sitio():
     try:
         response = requests.get(GetUsuarios_Sitio)
         response.raise_for_status()
@@ -48,7 +48,7 @@ def obtener_relacion_Usuarios_Sitio():
         return JSONResponse(content={"error": str(e)}, status_code=500)
 
 @app.get("/usuarios")
-def obtener_Usuarios():
+def obtener_Usuarios_relacion_TipoSitio():
     try:
         response = requests.get(GetUsuraios)
         response.raise_for_status()
